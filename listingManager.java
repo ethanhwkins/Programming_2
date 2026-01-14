@@ -8,7 +8,9 @@ public class listingManager {
 
     // Array to store all available listings 
     private ArrayList<listing> listings = new ArrayList<>();
-    listingFactory listingFactory = new listingFactory();
+
+    // Instance of listingFactory to create listing objects
+    private listingFactory listingFactory = new listingFactory();
 
     // Method to create and add a new listing to the listings array
     public void createListing(Integer id, String userID, String title, String description, String location, Double price) {

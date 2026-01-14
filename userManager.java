@@ -6,8 +6,8 @@ import java.util.HashMap;
 public class userManager {
     private HashMap<String, user> registeredUsers = new HashMap<>();  // Store active users with username as key
     private userFactory userFactory = new userFactory();  // Instance of userFactory to create user objects
-    private listingManager listingManager; // Instance of listingManager to manage listings
-    private bookingManager bookingManager; // Instance of bookingManager to manage bookings
+    private listingManager listingManager; // Instance of listingManager to delete a user's listings
+    private bookingManager bookingManager; // Instance of bookingManager to delete a user's bookings
 
     // Constructor to initialize userManager with a listingManager instance from the main class
     public userManager(listingManager listingManager2, bookingManager bookingManager2) {
@@ -18,7 +18,7 @@ public class userManager {
     // Method to add a new user to the active users list
     public void addUser(String username, String password, Integer accountType) {
 
-        // Validation checks for username and password
+        // Credential validation checking before account creation
 
         // Check if username already exists
         if (registeredUsers.containsKey(username)) {

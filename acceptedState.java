@@ -10,7 +10,7 @@ public class acceptedState implements State {
         this.booking = booking;
     }
 
-    // Allowed state transitions from accepted state
+    // Define permitted state transitions from accepted state
     @Override
     public void pending(booking booking, String currentUser) {
         System.out.println("Booking is already accepted. Cannot move to pending state.");

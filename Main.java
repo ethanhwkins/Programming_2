@@ -9,14 +9,14 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);  // Initialize scanner for user input
         boolean authenticated = false;  // Track login status in order to control access to menus
-        boolean running = true;   // Control the main application loop
+        boolean running = true; // Control the main application loop
         String currentUser = "";  // Track the currently logged-in user
         Integer accessLevel = null;  // Track the account type of the current user
 
         // Instantiate necessary classes for application functionality
         listingManager listingManager = new listingManager();
         bookingManager bookingManager = new bookingManager();
-        userManager userManager = new userManager(listingManager, bookingManager);  // Pass listingManager to userManager class, this is necessary for deleting user listings upon account deletion
+        userManager userManager = new userManager(listingManager, bookingManager);  // Pass listingManager and bookingManager to userManager class, this is necessary for deleting user listings and booking requests upon account deletion
         authenticate authenticate = new authenticate(userManager);  // Pass userManager to authenticate class, this is necessary for validating created user credentials
 
         // Main application loop
@@ -66,6 +66,7 @@ public class Main {
 
                         // Add new user to userManager using addUser method, which utilizes userFactory to create the user object
                         userManager.addUser(newUsername, newPassword, accountType);
+                        break;
 
                     default:
                         System.out.println("Invalid option. Please try again." + "\n");
@@ -81,14 +82,14 @@ public class Main {
 
                     // Switch case to handle main menu options based on user input
                     switch (choice) {
-                        // case 1 displays available properties by retrieving listings from listingManager and providing the user the option to make a booking if they are a tenant
+                        // case 1 displays available properties by retrieving listings from listingManager and providing the user the option to make a booking if they are a tenant, only tenants can access this feature
                         case 1:
 
-                            // Ensures that only tenants can make bookings
+                            // Ensures that only tenants can view and book available properties
                             if (accessLevel == 1) { 
                                 System.out.println("You have selected to view available properties." + "\n");
 
-                                // Returns user to main menu if no listings are available
+                                // Checks if there are any listings available, returns to main menu if none exist
                                 ArrayList<listing> listings = listingManager.getListings();
                                     if (listings.isEmpty()) {
                                     System.out.println("No properties are currently available." + "\n");
@@ -102,7 +103,7 @@ public class Main {
                                         System.out.println(listings.get(i));
                                     }
                                 }
-                                    // Prompt user to enter a listing ID to make a booking or return to the main menu
+                                    // Prompt tenant to enter a listing ID to make a booking or return to the main menu
                                     System.out.print("Enter the Listing ID to make a booking, or 0 to return to the main menu: ");
                                     int listingID = scanner.nextInt();
                                     scanner.nextLine(); // Consume newline
@@ -125,10 +126,11 @@ public class Main {
                                 
                             else {
                                 System.out.println("Only tenants can view and book available properties." + "\n");
+                                break;
                             }
                             break;
 
-                        // Case 2 allows a homeowner to create a new property listing by providing necessary details 
+                        // Case 2 allows a homeowner to create a new property listing by providing necessary details, only homeowners can access this feature
                         case 2:
                             
                             // Ensures that only homeowners can create listings
@@ -162,12 +164,12 @@ public class Main {
                         // Case 3 allows the user to view their notifications, displaying all bookings made and whether they are accepted, declined or pending for a tenant, and allowing homeowners to accept or reject booking requests
                         case 3:
 
-                            System.out.println("You have selected to view your bookings." + "\n");
+                            System.out.println("You have selected to view your notifications." + "\n");
 
                             // Returns user to main menu if there are no bookings
                             ArrayList<booking> bookings = bookingManager.getBookings();
                             if (bookings.isEmpty()) {
-                                System.out.println("Your bookings list is empty." + "\n");
+                                System.out.println("Your notificationslist is empty." + "\n");
 
                                 break;
                             } 

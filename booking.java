@@ -2,7 +2,7 @@ package Coursework.Programming_2;
 
 public class booking {
 
-    // The ONE current state (this is the key field)
+    // State attribute to hold the current state of the booking
     private State state;
 
     // Booking attributes
@@ -11,7 +11,7 @@ public class booking {
     private String recipientID;
     private Integer listingID;
 
-    // Constructor (THIS IS THE FIX)
+    // Constructor to initialize booking attributes and set initial state
     public booking(Integer bookingID, String senderID, String recipientID, Integer listingID) {
 
         this.bookingID = bookingID;
@@ -19,7 +19,7 @@ public class booking {
         this.recipientID = recipientID;
         this.listingID = listingID;
 
-        // Every booking starts as PENDING
+        // Set initial state of every booking that is created to pending by default
         this.state = new pendingState();
     }
 

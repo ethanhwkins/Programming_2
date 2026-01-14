@@ -38,7 +38,6 @@ public class bookingManager {
         }
     }
 
-
     // Method to reject a booking by its ID
     public void rejectBooking(Integer bookingID, String currentUser) {
         booking booking = getBookingByID(bookingID);

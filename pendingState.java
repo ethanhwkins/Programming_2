@@ -5,7 +5,7 @@ public class pendingState implements State {
     // Booking reference
     booking booking;
 
-    // Allowed state transitions from pending state
+    // Define permitted state transitions from pending state
     @Override
     public void pending(booking booking, String currentUser) {
         System.out.println("Booking is already pending. Cannot move to pending state again.");

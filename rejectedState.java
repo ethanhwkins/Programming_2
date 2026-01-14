@@ -10,7 +10,7 @@ public class rejectedState implements State {
         this.booking = booking;
     }
 
-    // Allowed state transitions from rejected state
+    // Define permitted state transitions from rejected state
     @Override
     public void pending(booking booking, String currentUser) {
         System.out.println("Booking is already rejected. Cannot move to pending state.");
