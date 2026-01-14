@@ -7,8 +7,8 @@ public class menu {
         System.out.print("Please select an option to continue: " + "\n");
         System.out.println("1. View available properties");
         System.out.println("2. Create a listing");
-        System.out.println("3. View inbox");
-        System.err.println("4. Account settings");
+        System.out.println("3. View bookings");
+        System.err.println("4. Delete account");
         System.out.println("5. Logout");
     
     }
