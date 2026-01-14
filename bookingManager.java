@@ -21,6 +21,20 @@ public class bookingManager {
         return bookings;
     }
 
+    // Method to retrieve bookings by sender ID
+    public ArrayList<booking> getBookingsByID(String senderID) {
+        if (senderID == null) {
+            return new ArrayList<>();
+        }
+        ArrayList<booking> userBookings = new ArrayList<>();
+        for (booking book : bookings) {
+            if (book.getSenderID().equals(senderID) || book.getRecipientID().equals(senderID)) {
+                userBookings.add(book);
+            }
+        }
+        return userBookings;
+    }
+
     public String getSenderID(Integer bookingID) {
         for (booking book : bookings) {
             if (book.getBookingID().equals(bookingID)) {

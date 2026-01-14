@@ -167,7 +167,7 @@ public class Main {
                             System.out.println("You have selected to view your notifications." + "\n");
 
                             // Returns user to main menu if there are no bookings
-                            ArrayList<booking> bookings = bookingManager.getBookings();
+                            ArrayList<booking> bookings = bookingManager.getBookingsByID(currentUser);
                             if (bookings.isEmpty()) {
                                 System.out.println("Your notificationslist is empty." + "\n");
 
