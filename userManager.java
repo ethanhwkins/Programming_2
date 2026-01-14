@@ -7,10 +7,12 @@ public class userManager {
     private HashMap<String, user> registeredUsers = new HashMap<>();  // Store active users with username as key
     private userFactory userFactory = new userFactory();  // Instance of userFactory to create user objects
     private listingManager listingManager; // Instance of listingManager to manage listings
+    private bookingManager bookingManager; // Instance of bookingManager to manage bookings
 
     // Constructor to initialize userManager with a listingManager instance from the main class
-    public userManager(listingManager listingManager2) {
+    public userManager(listingManager listingManager2, bookingManager bookingManager2) {
         this.listingManager = listingManager2;
+        this.bookingManager = bookingManager2;
     }
 
     // Method to add a new user to the active users list
@@ -52,6 +54,7 @@ public class userManager {
     // Method to delete a user and their associated listings
     public void deleteUser(String username) {
         listingManager.deleteUserListing(username);
+        bookingManager.deleteUserBookings(username);
         if (registeredUsers.containsKey(username)) {
             registeredUsers.remove(username);
         }

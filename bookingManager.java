@@ -55,4 +55,8 @@ public class bookingManager {
         }
         return null;
     }
-}
+
+    public void deleteUserBookings(String userID) {
+        bookings.removeIf(booking -> booking.getSenderID().equals(userID) || booking.getRecipientID().equals(userID));
+    }
+}   

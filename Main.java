@@ -15,8 +15,8 @@ public class Main {
 
         // Instantiate necessary classes for application functionality
         listingManager listingManager = new listingManager();
-        userManager userManager = new userManager(listingManager);  // Pass listingManager to userManager class, this is necessary for deleting user listings upon account deletion
         bookingManager bookingManager = new bookingManager();
+        userManager userManager = new userManager(listingManager, bookingManager);  // Pass listingManager to userManager class, this is necessary for deleting user listings upon account deletion
         authenticate authenticate = new authenticate(userManager);  // Pass userManager to authenticate class, this is necessary for validating created user credentials
 
         // Main application loop
@@ -83,9 +83,12 @@ public class Main {
                     switch (choice) {
                         // case 1 displays available properties by retrieving listings from listingManager and providing the user the option to make a booking if they are a tenant
                         case 1:
+
                             // Ensures that only tenants can make bookings
                             if (accessLevel == 1) { 
                                 System.out.println("You have selected to view available properties." + "\n");
+
+                                // Returns user to main menu if no listings are available
                                 ArrayList<listing> listings = listingManager.getListings();
                                     if (listings.isEmpty()) {
                                     System.out.println("No properties are currently available." + "\n");
@@ -93,15 +96,18 @@ public class Main {
                                     break;
                                     } 
                                 
+                                // Displays all available listings
                                 else {
                                     for (int i = 0; i < listings.size(); i++) {
                                         System.out.println(listings.get(i));
                                     }
                                 }
+                                    // Prompt user to enter a listing ID to make a booking or return to the main menu
                                     System.out.print("Enter the Listing ID to make a booking, or 0 to return to the main menu: ");
                                     int listingID = scanner.nextInt();
                                     scanner.nextLine(); // Consume newline
 
+                                    // Process booking if a valid listing ID is provided
                                     if (listingID != 0) {
                                         listing selectedListing = listingManager.getListingById(listingID);
                                         if (selectedListing != null) {
@@ -151,14 +157,14 @@ public class Main {
                             else {
                                 System.out.println("Only homeowners can create listings." + "\n");
                             }
-
                             break;
 
-                        // Case 3 allows the user to view their notifications, displaying all bookings made and whether they are accepted, declined or pending
+                        // Case 3 allows the user to view their notifications, displaying all bookings made and whether they are accepted, declined or pending for a tenant, and allowing homeowners to accept or reject booking requests
                         case 3:
 
-                            // Display user's notifications by retrieving bookings from bookingManager
                             System.out.println("You have selected to view your bookings." + "\n");
+
+                            // Returns user to main menu if there are no bookings
                             ArrayList<booking> bookings = bookingManager.getBookings();
                             if (bookings.isEmpty()) {
                                 System.out.println("Your bookings list is empty." + "\n");
@@ -166,13 +172,14 @@ public class Main {
                                 break;
                             } 
                             
+                            // Displays all bookings associated with the current user
                             else {
                                 for (int i = 0; i < bookings.size(); i++) {
                                     System.out.println(bookings.get(i));
                                 }
                             }
 
-                            // Only homeowners can update booking states
+                            // Ensures that only homeowners can update booking states
                             if (accessLevel == 2) { 
 
                                 System.out.println("Enter the Booking ID to update, or 0 to return to the main menu: ");
