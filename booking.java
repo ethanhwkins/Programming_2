@@ -13,7 +13,6 @@ public class booking {
 
     // Constructor to initialize booking attributes and set initial state
     public booking(Integer bookingID, String senderID, String recipientID, Integer listingID) {
-
         this.bookingID = bookingID;
         this.senderID = senderID;
         this.recipientID = recipientID;
@@ -41,7 +40,7 @@ public class booking {
         return state;
     }
 
-    // Getters
+    // Getters and Setters
     public Integer getBookingID() {
         return bookingID;
     }
@@ -74,6 +73,7 @@ public class booking {
         this.listingID = listingID;
     }
 
+    // \override toString method so that booking details can be printed easily
     @Override
     public String toString() {
         return

@@ -22,7 +22,7 @@ public class bookingManager {
     }
 
     // Method to retrieve bookings by sender ID
-    public ArrayList<booking> getBookingsByID(String senderID) {
+    public ArrayList<booking> getBookingsByUserID(String senderID) {
         if (senderID == null) {
             return new ArrayList<>();
         }
@@ -36,7 +36,8 @@ public class bookingManager {
     }
 
     public String getSenderID(Integer bookingID) {
-        for (booking book : bookings) {
+        for (int i = 0; i < bookings.size(); i++) {
+            booking book = bookings.get(i);
             if (book.getBookingID().equals(bookingID)) {
                 return book.getSenderID();
             }
@@ -61,7 +62,8 @@ public class bookingManager {
     }
 
     public booking getBookingByID(Integer bookingID) {
-        for (booking book : bookings) {
+        for (int i = 0; i < bookings.size(); i++) {
+            booking book = bookings.get(i);
             if (book.getBookingID().equals(bookingID)) {
                 return book;
             }
